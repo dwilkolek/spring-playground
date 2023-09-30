@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import reactor.util.function.Tuple2
+import java.time.Duration
 import java.util.UUID
-import java.util.concurrent.Executors
 
 
 @RestController
@@ -36,9 +35,11 @@ class CarsController(private val service: CarService) {
     }
 
     @PatchMapping("/{id}/make-older")
+    @Transactional
     fun makeOlder(@PathVariable id: UUID): Mono<ResponseEntity<Car>> {
         return service.getOne(id)
             .flatMap(service::makeOlder)
+            .delayElement(Duration.ofSeconds(10))
             .map{ ResponseEntity.ok(it) }
             .defaultIfEmpty(ResponseEntity.notFound().build())
     }
