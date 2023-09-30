@@ -1,4 +1,4 @@
-package eu.wilkolek.webflux
+package eu.wilkolek.webflux.car
 
 import org.springframework.data.r2dbc.repository.R2dbcRepository
 import org.springframework.stereotype.Repository
