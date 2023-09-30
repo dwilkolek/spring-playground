@@ -17,7 +17,7 @@ class DatabaseConfig {
         val initializer = ConnectionFactoryInitializer()
         initializer.setConnectionFactory(connectionFactory)
         val populator = CompositeDatabasePopulator()
-        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("init.sql")))
+        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("reactive/resources/init.sql")))
         initializer.setDatabasePopulator(populator)
         return initializer
     }
